@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 
 // import myPlugin from "./my-plugin/index.js";
 import { fixupPluginRules } from "@eslint/compat";
+import eslintPluginNeverthrow from "eslint-plugin-neverthrow";
 
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
@@ -66,4 +67,22 @@ export default [
   //     'myPlugin/must-use-result': 'error',
   //   },
   // },
+
+  {
+    plugins: {
+      eslintPluginNeverthrow: fixupPluginRules(eslintPluginNeverthrow),
+    },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      }
+    },
+    rules: {
+      'eslintPluginNeverthrow/must-use-result': 'error',
+    },
+  }
 ];
