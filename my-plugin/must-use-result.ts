@@ -1,9 +1,10 @@
 import { TypeChecker } from 'typescript';
 import { unionTypeParts } from 'tsutils';
 import { TSESTree } from '@typescript-eslint/types';
-import type {
-  TSESLint,
-  ParserServices,
+import {
+  type TSESLint,
+  type ParserServices,
+  ESLintUtils,
 } from '@typescript-eslint/utils';
 
 export enum MessageIds {
@@ -202,7 +203,7 @@ export const rule: TSESLint.RuleModule<MessageIds, []> = {
   defaultOptions: [],
 
   create(context) {
-    const parserServices = context.parserServices;
+    const parserServices = ESLintUtils.getParserServices(context);
     const checker = parserServices?.program?.getTypeChecker();
 
     if (!checker || !parserServices) {

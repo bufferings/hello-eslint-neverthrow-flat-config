@@ -1,4 +1,5 @@
 import { unionTypeParts } from 'tsutils';
+import { ESLintUtils, } from '@typescript-eslint/utils';
 export var MessageIds;
 (function (MessageIds) {
     MessageIds["MUST_USE"] = "mustUseResult";
@@ -148,7 +149,7 @@ export const rule = {
     },
     defaultOptions: [],
     create(context) {
-        const parserServices = context.parserServices;
+        const parserServices = ESLintUtils.getParserServices(context);
         const checker = parserServices?.program?.getTypeChecker();
         if (!checker || !parserServices) {
             throw Error('types not available, maybe you need set the parser to @typescript-eslint/parser');
