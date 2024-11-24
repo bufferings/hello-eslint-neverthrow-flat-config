@@ -6,6 +6,8 @@ import { FlatCompat } from "@eslint/eslintrc";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import myPlugin from "./my-plugin/index.js";
+
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,17 +33,35 @@ export default [
     }
   },
 
-  ...compat.config({
-    plugins: ['neverthrow'],
+  // ...compat.config({
+  //   plugins: ['neverthrow'],
+  //   rules: {
+  //     'neverthrow/must-use-result': 'error',
+  //   },
+  //   parser: '@typescript-eslint/parser',
+  //   parserOptions: {
+  //     ecmaVersion: 2021,
+  //     sourceType: 'module',
+  //     project: ['./tsconfig.json'],
+  //     tsconfigRootDir: __dirname,
+  //   },
+  // }),
+
+  {
+    plugins: {
+      myPlugin,
+    },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      }
+    },
     rules: {
-      'neverthrow/must-use-result': 'error',
+      'myPlugin/must-use-result': 'error',
     },
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 2021,
-      sourceType: 'module',
-      project: ['./tsconfig.json'],
-      tsconfigRootDir: __dirname,
-    },
-  })
+  },
 ];
