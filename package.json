@@ -8,5 +8,8 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0"
+  },
+  "dependencies": {
+    "neverthrow": "^8.1.1"
   }
 }
