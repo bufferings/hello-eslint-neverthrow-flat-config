@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import myPlugin from "./my-plugin/index.js";
+import { fixupPluginRules } from "@eslint/compat";
 
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
@@ -49,7 +50,7 @@ export default [
 
   {
     plugins: {
-      myPlugin,
+      myPlugin: fixupPluginRules(myPlugin),
     },
     languageOptions: {
       parser: tseslint.parser,
